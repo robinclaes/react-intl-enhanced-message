@@ -32,6 +32,20 @@ describe('FormattedEnhancedMessage', () => {
     )
   })
 
+  it('should replace enhancers correctly', () => {
+    const { container } = wrappedRender(
+      <FormattedEnhancedMessage
+        enhancers={{
+          newline: () => <br />,
+        }}
+        id="greeting"
+        defaultMessage="Hi Daniel, <x:newline></x:newline>"
+      />
+    )
+
+    expect(container.innerHTML).toMatchInlineSnapshot(`"Hi Daniel, <br>"`)
+  })
+
   it('should not fail with no enhancers provided', () => {
     const defaultMessage = 'Hi <0>Daniel</0>'
     const { container } = wrappedRender(
